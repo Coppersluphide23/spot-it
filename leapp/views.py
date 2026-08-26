@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import ProductForm, RegisterForm
-from .models import Product
+from .forms import CarForm, RegisterForm
+from .models import Car
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login,logout
@@ -37,8 +37,8 @@ def login_user(request):
     return render(request,'login.html',{'form':form})
 @login_required(login_url='login')
 def user_dashboard(request):
-    products=Product.objects.all()
-    return render(request, 'users/users-dashboard.html',{'products':products})
+    cars=Car.objects.all()
+    return render(request, 'users/users-dashboard.html',{'products':cars})
 #logout 
 def logout_user(request):
     logout(request)
