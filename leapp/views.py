@@ -9,8 +9,11 @@ from django.contrib.auth.decorators import login_required,user_passes_test
 
 
 # Create your views here.
-def index (request):
-    return render(request, 'index.html')
+def index(request):
+    #fetch only 3
+    cars = Car.objects.all()[:3]
+    carousel_items = Car.objects.filter(image__isnull=False).exclude(image__exact='')[:3]
+    return render(request, 'index.html', {'cars': cars, 'carousel_items': carousel_items})
 #registering a user
 def register_user(request):
     if request.method=='POST':
