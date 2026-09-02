@@ -5,8 +5,6 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login,logout
 from django.contrib.auth.decorators import login_required,user_passes_test
-# Create your views here.
-
 
 # Create your views here.
 def index(request):
@@ -46,3 +44,41 @@ def user_dashboard(request):
 def logout_user(request):
     logout(request)
     return redirect('login')
+#R-read-fetch data from db and display in admin dashboard
+@login_required(login_url='index.html')
+@user_passes_test(lambda u:u.is_staff,login_url='login')
+def admin(request):
+    products=Car.objects.all()
+    return render(request, 'admin-dashboard.html',{'products':products})
+#create-add data to db using forms
+@user_passes_test(lambda u:u.is_staff,login_url='login')
+@login_required(login_url='index.html')
+def addproduct(request):
+    if request.method == 'POST':
+        form=CarForm(request.POST,request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('cars')
+    else:
+        form = CarForm()
+    return render(request, 'addproduct.html', {'form': form})
+#D-delete data from db
+@user_passes_test(lambda u:u.is_staff,login_url='login')
+@login_required(login_url='login')
+def delete_product(request,id):
+    product=get_object_or_404(Car,id=id)
+    product.delete()
+    return redirect('cars')
+#u- update existing data in db
+@user_passes_test(lambda u:u.is_staff,login_url='login')
+@login_required(login_url='login')
+def update_product(request,id):
+    product=get_object_or_404(Car,id=id)
+    if request.method=='POST':
+        form = CarForm(request.POST,request.FILES,instance=product)
+        if form.is_valid():
+            form.save()
+            return redirect('cars')
+    else :
+        form=CarForm(instance=car)
+        return render(request,'addproduct.html',{'form':form})
