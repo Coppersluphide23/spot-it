@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title%}Add Product{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            {% if form.instance.id %}
+            <h2 class="text-success text-center">Update Product</h2>
+            {% else %}
+            <h2 class="text-success text-center">Add product</h2>
+            {% endif %}
+            <form method="POST" class="card p-3 shadow" enctype="multipart/form-data">
+                {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit" class="btn btn-warning">
+                {% if form.instance.id%}Update Product{% else%}Add Product{% endif %}</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

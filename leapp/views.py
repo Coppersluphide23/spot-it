@@ -29,7 +29,7 @@ def login_user(request):
             user=form.get_user()
             login(request,user)
             if user.is_staff:
-                return redirect('products')
+                return redirect('index')
             else:
                 return redirect('user')
         
@@ -49,7 +49,7 @@ def logout_user(request):
 @user_passes_test(lambda u:u.is_staff,login_url='login')
 def admin(request):
     products=Car.objects.all()
-    return render(request, 'admin-dashboard.html',{'products':products})
+    return render(request, 'admin dashboard.html',{'products':products})
 #create-add data to db using forms
 @user_passes_test(lambda u:u.is_staff,login_url='login')
 @login_required(login_url='index.html')
@@ -58,7 +58,7 @@ def addproduct(request):
         form=CarForm(request.POST,request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('cars')
+            return redirect('products')
     else:
         form = CarForm()
     return render(request, 'addproduct.html', {'form': form})
@@ -80,5 +80,5 @@ def update_product(request,id):
             form.save()
             return redirect('cars')
     else :
-        form=CarForm(instance=car)
+        form=CarForm(instance=cars)
         return render(request,'addproduct.html',{'form':form})

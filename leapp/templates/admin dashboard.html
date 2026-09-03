@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title%}Admin-dashboard{% endblock %}
+{% block content %}
+<div class="container">
+<h1 class="text-primary text-center">Admin dashboard</h1>
+<p class="text-center">Welcome {{user.username}}to admin dashboard</p>
+<a href="{% url 'addproduct' %}" class="btn btn-warning btn-lg btn-block ">ADD PRODUCT</a>
+<h2 class="text-success text-center">Product list</h2>
+<table class="table table-danger table-striped-columns table-hover table-bordered table">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        {% for product in products %}
+            <td>{{product.id}}</td>
+            <td>{{product.name}}</td>
+            <td>{{product.price}}</td>
+            <td>{{product.description}}</td>
+            <td> <img src="{{product.image.url}}" alt="Product {{product.name}}" width="150" height="100"> </td>
+            <td>
+                <a href="{% url 'update' product.id %}" class="btn btn-primary">UPDATE</a>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#mymodal{{ product.id }}">
+                DELETE
+                </button>
+            </td>
+        </tr>
+          {% endfor %}
+    </tbody>
+
+</table>
+{% for product in products %}
+<!-- Modal -->
+<div class="modal fade" id="mymodal{{ product.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete product</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete {{ product.name }}?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+
+        <a href="{% url 'delete' product.id %}" class="btn btn-danger">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+</div>
+{% endblock %}
