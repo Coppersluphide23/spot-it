@@ -7,12 +7,12 @@
             {% if form.instance.id %}
             <h2 class="text-success text-center">Update Product</h2>
             {% else %}
-            <h2 class="text-success text-center">Add product</h2>
+            <h2 class="text-warning text-center">Add product</h2>
             {% endif %}
             <form method="POST" class="card p-3 shadow" enctype="multipart/form-data">
                 {% csrf_token %}
             {{form.as_p}}
-            <button type="submit" class="btn btn-warning">
+            <button type="submit" class="btn btn-success">
                 {% if form.instance.id%}Update Product{% else%}Add Product{% endif %}</button>
             </form>
         </div>

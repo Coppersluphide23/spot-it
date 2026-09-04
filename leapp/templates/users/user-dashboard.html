@@ -1,0 +1,26 @@
+{% extends 'base.html'%}
+{% block title %}User Dashboard {% endblock %}
+{% block content %}
+<div class="container">
+    <h1 class="text-center text-success">User Dashboard</h1>
+    <h3>welcome {{user.username}}</h3>
+    <div class="row">
+        {%for prod in products%}
+        <div class="col-md-4 mb-4">
+            <div class="card product-card h-100">
+                <img src="{{prod.image.url}}" alt="product image">
+                <div class="card-body">
+                    <h5 class="card-title">{{prod.name}}</h5>
+                    <p class="card-text">{{prod.description}}</p>
+                    <div class="mt-auto d-flex justify-content-between align-items-center">
+                    <span>ksh{{prod.price}}</span>
+                    <a class="btn btn-outline-primary">view</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {%endfor%}
+    </div>
+    </div>
+{%endblock%}
