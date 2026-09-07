@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_daraja',
     'leapp',
 ]
 
@@ -68,7 +69,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'myproject.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases

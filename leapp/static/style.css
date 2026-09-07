@@ -1,0 +1,23 @@
+
+  .carousel-image {
+    height: 360px;
+    object-fit: cover;
+  }
+
+  @media (max-width: 576px) {
+    .carousel-image {
+      height: 300px;
+    }
+  }
+body {
+    background-color:khaki;
+  }
+
+  .card {
+    margin-bottom: 20px;
+  }
+
+  .card-img-top {
+    height: 200px;
+    object-fit: cover;
+  }

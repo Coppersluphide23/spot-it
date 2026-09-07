@@ -11,4 +11,7 @@ urlpatterns=[
     path('addproduct/',views.addproduct,name='addproduct'),
     path('delete/<int:id>/',views.delete_product,name='delete'),
     path('update/<int:id>/',views.update_product,name='update'),
+    path("",views.index,name='index'),
+    path("pay/",views.pay_now,name='pay'),
+    path("callback/",views.callback,name='callback'),
 ]
