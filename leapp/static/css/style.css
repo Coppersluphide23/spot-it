@@ -10,14 +10,10 @@
     }
   }
 body {
-    background-color:khaki;
+    background-color:lemonchiffon;
   }
+.product-card img{
+    height:200px;
+    object-fit:cover;
+}
 
-  .card {
-    margin-bottom: 20px;
-  }
-
-  .card-img-top {
-    height: 200px;
-    object-fit: cover;
-  }
